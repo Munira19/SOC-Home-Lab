@@ -1,0 +1,111 @@
+# Incident Report 002: PowerShell Process Execution Investigation
+
+## 1. Overview
+
+A controlled PowerShell activity was performed on the Windows endpoint to validate endpoint monitoring capabilities and confirm Sysmon process visibility.
+
+The objective was to monitor process execution events and analyze how commands executed through PowerShell are recorded.
+
+---
+
+## 2. Environment
+
+**Endpoint:**
+- Operating System: Windows 11
+- Hostname: LAPTOP-9E4S2KCF
+- User: Muneera Alarabi
+
+**Monitoring Tool:**
+- Sysmon
+- Event ID: 1 (Process Creation)
+
+---
+
+## 3. Activity Observed
+
+**Parent Process:**
+
+```text
+C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe
+```
+
+**Executed Process:**
+
+```text
+C:\Windows\SysWOW64\HOSTNAME.EXE
+```
+
+**Command Line:**
+
+```text
+"C:\WINDOWS\system32\HOSTNAME.EXE"
+```
+
+**Execution Context:**
+
+- User:
+
+```text
+LAPTOP-9E4S2KCF\Muneera Alarabi
+```
+
+- Integrity Level:
+
+```text
+Medium
+```
+
+---
+
+## 4. Detection
+
+Sysmon Event ID 1 successfully captured the process creation event, providing visibility into:
+
+- Executed process
+- Parent process
+- Command line arguments
+- User account
+- Process integrity level
+- File hashes
+
+---
+
+## 5. Investigation and Analysis
+
+The event showed that a Windows command-line utility was launched through PowerShell.
+
+The executed file:
+
+```text
+hostname.exe
+```
+
+is a legitimate Windows utility used to display the system hostname.
+
+Based on the collected telemetry:
+
+- No suspicious file path was identified.
+- No abnormal execution behavior was observed.
+- The activity was determined to be benign.
+
+---
+
+## 6. MITRE ATT&CK Mapping
+
+**Technique:**
+
+```text
+T1059.001 - PowerShell
+```
+
+**Description:**
+
+Adversaries may use PowerShell to execute commands and perform activities on Windows systems.
+
+---
+
+## 7. Conclusion
+
+The endpoint monitoring configuration successfully detected and recorded PowerShell-related process execution using Sysmon Event ID 1.
+
+This exercise demonstrated the ability to collect endpoint telemetry, investigate process activity, and perform basic SOC-level alert analysis.

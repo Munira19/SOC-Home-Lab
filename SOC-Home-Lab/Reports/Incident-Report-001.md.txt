@@ -1,0 +1,49 @@
+# Incident Report 001: Network Reconnaissance Detection
+
+## Overview
+A controlled network reconnaissance activity was performed from a Kali Linux attacker machine against a Windows endpoint.
+
+## Environment
+
+Attacker:
+- Kali Linux
+- IP: 192.168.8.123
+
+Target:
+- Windows 11 Endpoint
+- Hostname: LAPTOP-9E4S2KCF
+- IP: 192.168.8.116
+
+## Activity Observed
+
+Tool:
+- Nmap
+
+Command:
+nmap -sV 192.168.8.116
+
+Purpose:
+Service enumeration and network reconnaissance.
+
+## Detection
+
+Source:
+Sysmon Event ID 3 (Network Connection)
+
+Observed:
+- Source IP: 192.168.8.123
+- Destination IP: 192.168.8.116
+
+## Analysis
+
+The activity represents network service scanning behavior. 
+No compromise was identified. The activity was part of a controlled security testing exercise.
+
+## MITRE ATT&CK Mapping
+
+Technique:
+T1046 - Network Service Scanning
+
+## Conclusion
+
+The monitoring setup successfully detected and recorded network reconnaissance activity using Sysmon telemetry.
